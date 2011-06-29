@@ -127,10 +127,10 @@ date-clj uses java.text.SimpleDateFormat for parsing and formatting.
 > (-> xmas (subtract 1 :day) (format-date "MM/dd 'is christmas eve'"))
 
 > ; prints the current month's full name in  brazilian portuguese<br/>
-> (binding [\*locale\* (Locale. "pt" "BR")] (format-date (today) "MMMM"))
+> (binding \[\*locale\* (Locale. "pt" "BR")\] (format-date (today) "MMMM"))
 
 > ; a seq of the week day names in german<br/>
-> (binding [\*locale\* (Locale/GERMAN)] (names :week-days))
+> (binding \[\*locale\* (Locale/GERMAN)\] (names :week-days))
 
 > ; a seq of the short month names in the default locale<br/>
 > (names :months :short)
