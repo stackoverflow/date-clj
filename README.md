@@ -2,6 +2,7 @@
 
 A date library for clojure loosely based on [date.js](http://www.datejs.com/) javascript date library.<br/>
 date-clj aims to be simple and fun and not a complete and exaustive solution like [joda-time](http://joda-time.sourceforge.net/).
+All functions in date-clj are immutable.
 
 ## Installation
 
@@ -30,7 +31,7 @@ function parameter called 'date' receives a java.util.Date too.
 > ; the first sunday of april of the current year, 1:45 PM<br/>
 > (date :week-day :sunday :month :april :hour 13 :minute 45)
 
-> ; the current date set to december of 1900<br/>
+> ; the current date set to december of 1900 (set-date is a immutable function, it returns a new date)<br/>
 > (-> (today) (set-date :month :december :year 1900))
 
 ### Date math functions
