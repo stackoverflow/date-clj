@@ -4,6 +4,8 @@
   (:import (java.util Date GregorianCalendar Calendar Locale)
            (java.text SimpleDateFormat ParseException)))
 
+
+
 (def ^{:private true} days-of-the-week
   [:sunday :monday :tuesday :wednesday :thursday :friday :saturday])
 
@@ -11,13 +13,13 @@
   [:january :february :march :april :may :june
    :july :august :september :october :november :december])
 
-(def ^{:dynamic true} *locale* (Locale/getDefault))
+(def ^{:dynamic true, :tag Locale} *locale* (Locale/getDefault))
 
 (declare date following add)
 
 ;; helpers
 
-(defn- as-calendar
+(defn- ^Calendar as-calendar
   "Returns a calendar for this date."
   [date]
   (let [cal (Calendar/getInstance)]
@@ -101,7 +103,7 @@
 (defn- leap-year-checker
   "Checks if the year of the date is a leap year."
   [date]
-  (let [cal (as-calendar date)]
+  (let [^GregorianCalendar cal (as-calendar date)]
     (.isLeapYear cal (.get cal Calendar/YEAR))))
 
 (defn- new-year-checker
@@ -355,12 +357,12 @@ Eg.: (-> (today) (is? :sunday :january 1945))
 
 (defn after?
   "Returns true if date1 came after date2."
-  [date1 date2]
+  [^Date date1 ^Date date2]
   (> (.getTime date1) (.getTime date2)))
 
 (defn before?
   "Returns true if date1 came before date2."
-  [date1 date2]
+  [^Date date1 ^Date date2]
   (< (.getTime date1) (.getTime date2)))
 
 (defn between?
@@ -614,7 +616,7 @@ Eg.: (-> (today) (is? :sunday :january 1945))
   "Parse a string into a date using the first valid format of the supplied formats.
 See java.text.SimpleDateFormat for formats."
   [str & formats]
-  (let [s (map (fn [format]
+  (let [s (map (fn [^String format]
                  (try
                    (let [sdf (SimpleDateFormat. format *locale*)]
                      (.parse sdf str))
@@ -626,7 +628,7 @@ See java.text.SimpleDateFormat for formats."
 (defn format-date
   "Format a date into a string using the supplied format.
 See java.text.SimpleDateFormat for formats."
-  [date format]
+  [date ^String format]
   (let [sdf (SimpleDateFormat. format *locale*)]
     (.format sdf date)))
 
