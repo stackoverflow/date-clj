@@ -11,7 +11,7 @@
   [:january :february :march :april :may :june
    :july :august :september :october :november :december])
 
-(def *locale* (Locale/getDefault))
+(def ^{:dynamic true} *locale* (Locale/getDefault))
 
 (declare date following add)
 
