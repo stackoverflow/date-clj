@@ -8,7 +8,7 @@ All functions in date-clj are immutable.
 
 Add date-clj to you project.clj dependencies:
 
-> [date-clj "1.0.0"]
+> [date-clj "1.0.1"]
 
 Use it on your namespace:
 
